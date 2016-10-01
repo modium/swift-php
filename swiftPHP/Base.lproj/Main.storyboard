@@ -174,6 +174,9 @@
                                 <color key="backgroundColor" red="0.1176470588" green="0.53333333329999999" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Register"/>
+                                <connections>
+                                    <action selector="registerBtnPressed:" destination="KwW-Zn-pcB" eventType="touchUpInside" id="UZl-MM-W7e"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -185,6 +188,18 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="accountTypeTextField" destination="Kcr-sT-92F" id="THC-yj-spU"/>
+                        <outlet property="cityTextField" destination="GXw-sz-4Na" id="iha-2U-aJe"/>
+                        <outlet property="companyNameTextField" destination="PGj-SP-tHv" id="LNh-gR-mFx"/>
+                        <outlet property="companyPhoneTextField" destination="MW0-vt-a7k" id="pbE-5F-kbU"/>
+                        <outlet property="countryTextField" destination="mdn-Pd-H8w" id="O5m-Bu-yPE"/>
+                        <outlet property="userEmailAddressTextField" destination="8YU-wd-yld" id="O5d-AZ-rfZ"/>
+                        <outlet property="userFirstNameTextField" destination="Jpt-AH-LvJ" id="boT-MY-7pW"/>
+                        <outlet property="userLastNameTextField" destination="dc1-LY-KtO" id="t0F-DP-PQe"/>
+                        <outlet property="userPasswordRepeatTextField" destination="j07-A7-cDF" id="QgZ-Hf-EgA"/>
+                        <outlet property="userPasswordTextField" destination="Dp5-94-iCb" id="GeV-XR-d5K"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f3A-0e-QdJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
