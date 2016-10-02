@@ -9,7 +9,7 @@
         <!--Sign In-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="swiftPHP" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="swiftPHP" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -254,7 +254,7 @@
                                 <state key="normal" title="Select Photo"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEe-ZA-9pQ">
-                                <frame key="frameInset" minX="67" minY="246" width="240" height="21"/>
+                                <frame key="frameInset" minX="67" minY="247" width="240" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -264,8 +264,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Dashboard" id="j9J-c6-Gl6">
-                        <barButtonItem key="rightBarButtonItem" title="Log out" id="oII-G3-4F4"/>
+                        <barButtonItem key="rightBarButtonItem" title="Log out" id="oII-G3-4F4">
+                            <connections>
+                                <action selector="logoutBtnPressed:" destination="C64-Xh-pNx" id="qDP-qe-h36"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="usernameLbl" destination="EEe-ZA-9pQ" id="sk3-lk-Pm5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="frk-cL-CTI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

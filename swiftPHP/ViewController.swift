@@ -66,6 +66,12 @@ class ViewController: UIViewController {
                         
                         if(userId != nil) {
                             
+                            // DO NOT STORE PASSWORD
+                            NSUserDefaults.standardUserDefaults().setObject(parseJSON["userFirstName"], forKey: "userFirstName")
+                            NSUserDefaults.standardUserDefaults().setObject(parseJSON["userLastName"], forKey: "userLastName")
+                            NSUserDefaults.standardUserDefaults().setObject(parseJSON["userId"], forKey: "userId")
+                            NSUserDefaults.standardUserDefaults().synchronize() // Store user data within app for later access
+                            
                             // Take user to protected page
                             let dashboard = self.storyboard?.instantiateViewControllerWithIdentifier("DashboardViewController") as! DashboardViewController
                             
