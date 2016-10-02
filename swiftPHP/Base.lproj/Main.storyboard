@@ -38,6 +38,9 @@
                                 <color key="backgroundColor" red="0.1176470588" green="0.53333333329999999" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Sign In"/>
+                                <connections>
+                                    <action selector="signInBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oFs-xJ-gNj"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBu-zU-5Mj">
                                 <frame key="frameInset" minX="101" minY="224" width="172" height="21"/>
@@ -60,6 +63,10 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Sign In" id="Dju-rx-kNM"/>
+                    <connections>
+                        <outlet property="userEmailAddressTextField" destination="9xU-3p-Tyf" id="yCB-zB-G7f"/>
+                        <outlet property="userPasswordTextField" destination="ZzB-P2-6CD" id="wYN-F5-nIP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -226,7 +233,7 @@
         <!--Dashboard-->
         <scene sceneID="IK6-wC-9qS">
             <objects>
-                <viewController id="C64-Xh-pNx" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DashboardViewController" id="C64-Xh-pNx" customClass="DashboardViewController" customModule="swiftPHP" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DTZ-mb-Hbn"/>
                         <viewControllerLayoutGuide type="bottom" id="17v-PH-u3N"/>
