@@ -36,6 +36,10 @@ class ViewController: UIViewController {
             return
         }
         
+        let spinningActivity = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        spinningActivity.label.text = "Signing in..."
+        spinningActivity.detailsLabel.text = "Please wait"
+        
         let myUrl = NSURL(string: "http://localhost/swiftPHP/scripts/userSignIn.php");
         let request = NSMutableURLRequest(URL:myUrl!);
         request.HTTPMethod = "POST";
@@ -48,6 +52,8 @@ class ViewController: UIViewController {
 
             dispatch_async(dispatch_get_main_queue()) {
             
+                spinningActivity.hideAnimated(true)                
+                
                 if(error != nil) {
                     // Display alert message
                     let myAlert = UIAlertController(title: "Alert", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
@@ -69,16 +75,22 @@ class ViewController: UIViewController {
                             // DO NOT STORE PASSWORD
                             NSUserDefaults.standardUserDefaults().setObject(parseJSON["userFirstName"], forKey: "userFirstName")
                             NSUserDefaults.standardUserDefaults().setObject(parseJSON["userLastName"], forKey: "userLastName")
+                            /* This is where we store the user's Id for app use */
                             NSUserDefaults.standardUserDefaults().setObject(parseJSON["userId"], forKey: "userId")
                             NSUserDefaults.standardUserDefaults().synchronize() // Store user data within app for later access
                             
+                            /*
                             // Take user to protected page
                             let dashboard = self.storyboard?.instantiateViewControllerWithIdentifier("DashboardViewController") as! DashboardViewController
                             
                             let dashboardNav = UINavigationController(rootViewController: dashboard)
                             let appDelegate = UIApplication.sharedApplication().delegate
                             appDelegate?.window??.rootViewController = dashboardNav
+                            */
                             
+                            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                            appDelegate.buildNavigationDrawer()
+ 
                         } else {
                             
                             // Display alert message
@@ -91,7 +103,7 @@ class ViewController: UIViewController {
                         }
                         
                     }
-                } catch{
+                } catch {
                     print(error)
                 }
                 

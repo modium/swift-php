@@ -59,8 +59,11 @@ class RegisterViewController: UIViewController {
             return
         }
         
-        // Send HTTP POST
+        let spinningActivity = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        spinningActivity.label.text = "Registering..."
+        spinningActivity.detailsLabel.text = "Please wait"
         
+        // Send HTTP POST
         let myUrl = NSURL(string: "http://localhost/swiftPHP/scripts/registerUser.php");
         let request = NSMutableURLRequest(URL:myUrl!);
         request.HTTPMethod = "POST";
@@ -73,6 +76,8 @@ class RegisterViewController: UIViewController {
             
             dispatch_async(dispatch_get_main_queue()) {
 
+                spinningActivity.hideAnimated(true) // Hide spinner by this point
+                
                 if error != nil {
                     self.displayAlertMessage(error!.localizedDescription)
                     return

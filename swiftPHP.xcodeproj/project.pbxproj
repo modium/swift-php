@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C4B41211DA17E98009882B9 /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4B41191DA17E98009882B9 /* MMDrawerBarButtonItem.m */; };
+		3C4B41221DA17E98009882B9 /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4B411B1DA17E98009882B9 /* MMDrawerController.m */; };
+		3C4B41231DA17E98009882B9 /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4B411E1DA17E98009882B9 /* MMDrawerVisualState.m */; };
+		3C4B41241DA17E98009882B9 /* UIViewController+MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4B41201DA17E98009882B9 /* UIViewController+MMDrawerController.m */; };
+		3C4B41271DA18005009882B9 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4B41261DA18005009882B9 /* SidebarViewController.swift */; };
+		3C4B412A1DA18864009882B9 /* splash2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C4B41281DA18864009882B9 /* splash2x.png */; };
+		3C4B412B1DA18864009882B9 /* splashR4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C4B41291DA18864009882B9 /* splashR4.png */; };
+		3C4B412E1DA18923009882B9 /* BOLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4B412D1DA18923009882B9 /* BOLViewController.swift */; };
+		3C4B41321DA1955D009882B9 /* hamburger.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C4B41311DA1955D009882B9 /* hamburger.png */; };
+		3C4B41351DA2B066009882B9 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4B41341DA2B066009882B9 /* MBProgressHUD.m */; };
 		3C8097D31DA04C5900DAFB21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8097D21DA04C5900DAFB21 /* AppDelegate.swift */; };
 		3C8097D51DA04C5900DAFB21 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8097D41DA04C5900DAFB21 /* ViewController.swift */; };
 		3C8097D81DA04C5900DAFB21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C8097D61DA04C5900DAFB21 /* Main.storyboard */; };
@@ -17,6 +27,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C4B41171DA17E97009882B9 /* swiftPHP-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "swiftPHP-Bridging-Header.h"; sourceTree = "<group>"; };
+		3C4B41181DA17E98009882B9 /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
+		3C4B41191DA17E98009882B9 /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
+		3C4B411A1DA17E98009882B9 /* MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerController.h; sourceTree = "<group>"; };
+		3C4B411B1DA17E98009882B9 /* MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerController.m; sourceTree = "<group>"; };
+		3C4B411C1DA17E98009882B9 /* MMDrawerController+Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMDrawerController+Subclass.h"; sourceTree = "<group>"; };
+		3C4B411D1DA17E98009882B9 /* MMDrawerVisualState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerVisualState.h; sourceTree = "<group>"; };
+		3C4B411E1DA17E98009882B9 /* MMDrawerVisualState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerVisualState.m; sourceTree = "<group>"; };
+		3C4B411F1DA17E98009882B9 /* UIViewController+MMDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MMDrawerController.h"; sourceTree = "<group>"; };
+		3C4B41201DA17E98009882B9 /* UIViewController+MMDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MMDrawerController.m"; sourceTree = "<group>"; };
+		3C4B41261DA18005009882B9 /* SidebarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
+		3C4B41281DA18864009882B9 /* splash2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash2x.png; sourceTree = "<group>"; };
+		3C4B41291DA18864009882B9 /* splashR4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splashR4.png; sourceTree = "<group>"; };
+		3C4B412D1DA18923009882B9 /* BOLViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BOLViewController.swift; sourceTree = "<group>"; };
+		3C4B41311DA1955D009882B9 /* hamburger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hamburger.png; sourceTree = "<group>"; };
+		3C4B41331DA2B066009882B9 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		3C4B41341DA2B066009882B9 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		3C8097CF1DA04C5900DAFB21 /* swiftPHP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftPHP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C8097D21DA04C5900DAFB21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C8097D41DA04C5900DAFB21 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -39,6 +66,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C0283AD1DA4A4BA00A22033 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				3C4B41331DA2B066009882B9 /* MBProgressHUD.h */,
+				3C4B41341DA2B066009882B9 /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		3C4B41251DA17EA7009882B9 /* MMDrawer */ = {
+			isa = PBXGroup;
+			children = (
+				3C4B41181DA17E98009882B9 /* MMDrawerBarButtonItem.h */,
+				3C4B41191DA17E98009882B9 /* MMDrawerBarButtonItem.m */,
+				3C4B411A1DA17E98009882B9 /* MMDrawerController.h */,
+				3C4B411B1DA17E98009882B9 /* MMDrawerController.m */,
+				3C4B411C1DA17E98009882B9 /* MMDrawerController+Subclass.h */,
+				3C4B411D1DA17E98009882B9 /* MMDrawerVisualState.h */,
+				3C4B411E1DA17E98009882B9 /* MMDrawerVisualState.m */,
+				3C4B411F1DA17E98009882B9 /* UIViewController+MMDrawerController.h */,
+				3C4B41201DA17E98009882B9 /* UIViewController+MMDrawerController.m */,
+			);
+			name = MMDrawer;
+			sourceTree = "<group>";
+		};
+		3C4B412C1DA1886B009882B9 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				3C4B41311DA1955D009882B9 /* hamburger.png */,
+				3C4B41291DA18864009882B9 /* splashR4.png */,
+				3C4B41281DA18864009882B9 /* splash2x.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		3C8097C61DA04C5900DAFB21 = {
 			isa = PBXGroup;
 			children = (
@@ -58,6 +120,9 @@
 		3C8097D11DA04C5900DAFB21 /* swiftPHP */ = {
 			isa = PBXGroup;
 			children = (
+				3C0283AD1DA4A4BA00A22033 /* MBProgressHUD */,
+				3C4B412C1DA1886B009882B9 /* Images */,
+				3C4B41251DA17EA7009882B9 /* MMDrawer */,
 				3C8097D21DA04C5900DAFB21 /* AppDelegate.swift */,
 				3C8097D41DA04C5900DAFB21 /* ViewController.swift */,
 				3C8097D61DA04C5900DAFB21 /* Main.storyboard */,
@@ -66,6 +131,9 @@
 				3C8097DE1DA04C5900DAFB21 /* Info.plist */,
 				3C8097E41DA0713600DAFB21 /* RegisterViewController.swift */,
 				3C8097E61DA0907E00DAFB21 /* DashboardViewController.swift */,
+				3C4B41171DA17E97009882B9 /* swiftPHP-Bridging-Header.h */,
+				3C4B41261DA18005009882B9 /* SidebarViewController.swift */,
+				3C4B412D1DA18923009882B9 /* BOLViewController.swift */,
 			);
 			path = swiftPHP;
 			sourceTree = "<group>";
@@ -103,6 +171,7 @@
 					3C8097CE1DA04C5900DAFB21 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = M467D9Z2F8;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -130,9 +199,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C4B412A1DA18864009882B9 /* splash2x.png in Resources */,
+				3C4B41321DA1955D009882B9 /* hamburger.png in Resources */,
 				3C8097DD1DA04C5900DAFB21 /* LaunchScreen.storyboard in Resources */,
 				3C8097DA1DA04C5900DAFB21 /* Assets.xcassets in Resources */,
 				3C8097D81DA04C5900DAFB21 /* Main.storyboard in Resources */,
+				3C4B412B1DA18864009882B9 /* splashR4.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,8 +217,15 @@
 			files = (
 				3C8097E51DA0713600DAFB21 /* RegisterViewController.swift in Sources */,
 				3C8097D51DA04C5900DAFB21 /* ViewController.swift in Sources */,
+				3C4B41211DA17E98009882B9 /* MMDrawerBarButtonItem.m in Sources */,
+				3C4B41241DA17E98009882B9 /* UIViewController+MMDrawerController.m in Sources */,
+				3C4B41351DA2B066009882B9 /* MBProgressHUD.m in Sources */,
+				3C4B412E1DA18923009882B9 /* BOLViewController.swift in Sources */,
 				3C8097D31DA04C5900DAFB21 /* AppDelegate.swift in Sources */,
+				3C4B41221DA17E98009882B9 /* MMDrawerController.m in Sources */,
 				3C8097E71DA0907E00DAFB21 /* DashboardViewController.swift in Sources */,
+				3C4B41271DA18005009882B9 /* SidebarViewController.swift in Sources */,
+				3C4B41231DA17E98009882B9 /* MMDrawerVisualState.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,11 +346,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = M467D9Z2F8;
 				INFOPLIST_FILE = swiftPHP/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.modiumdesign.swiftPHP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "swiftPHP/swiftPHP-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
@@ -280,11 +363,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = M467D9Z2F8;
 				INFOPLIST_FILE = swiftPHP/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.modiumdesign.swiftPHP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "swiftPHP/swiftPHP-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
@@ -308,6 +394,7 @@
 				3C8097E31DA04C5900DAFB21 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
