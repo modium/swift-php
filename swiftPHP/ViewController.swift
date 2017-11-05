@@ -23,48 +23,50 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func signInBtnPressed(sender: AnyObject) {
+    @IBAction func signInBtnPressed(_ sender: Any) {
+        signIn()
+    }
+    
+    func signIn() {
         let userEmailAddress = userEmailAddressTextField.text
         let userPassword = userPasswordTextField.text
         
         if(userEmailAddress!.isEmpty || userPassword!.isEmpty) {
             // Display alert message
-            let myAlert = UIAlertController(title: "Alert", message: "Email and password must be entered.", preferredStyle: UIAlertControllerStyle.Alert)
-            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+            let myAlert = UIAlertController(title: "Alert", message: "Email and password must be entered.", preferredStyle: UIAlertControllerStyle.alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
             myAlert.addAction(okAction)
-            self.presentViewController(myAlert, animated: true, completion: nil)
+            self.present(myAlert, animated: true, completion: nil)
             return
         }
         
-        let spinningActivity = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        let spinningActivity = MBProgressHUD.showAdded(to: self.view, animated: true)
         spinningActivity.label.text = "Signing in..."
         spinningActivity.detailsLabel.text = "Please wait"
         
         let myUrl = NSURL(string: "http://localhost/swiftPHP/scripts/userSignIn.php");
-        let request = NSMutableURLRequest(URL:myUrl!);
-        request.HTTPMethod = "POST";
+        var request = URLRequest(url:myUrl! as URL);
+        request.httpMethod = "POST";
         
         let postString = "userEmail=\(userEmailAddress!)&userPassword=\(userPassword!)";
         
-        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding);
+        request.httpBody = postString.data(using: String.Encoding.utf8);
         
-        NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: { (data:NSData?, response:NSURLResponse?, error:NSError?) in
-
-            dispatch_async(dispatch_get_main_queue()) {
-            
-                spinningActivity.hideAnimated(true)                
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            DispatchQueue.main.async {
+                spinningActivity.hide(animated: true)
                 
                 if(error != nil) {
                     // Display alert message
-                    let myAlert = UIAlertController(title: "Alert", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
-                    let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+                    let myAlert = UIAlertController(title: "Alert", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
+                    let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
                     myAlert.addAction(okAction)
-                    self.presentViewController(myAlert, animated: true, completion: nil)
+                    self.present(myAlert, animated: true, completion: nil)
                     return
                 }
                 
                 do {
-                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers) as? NSDictionary
+                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
                     
                     if let parseJSON = json { // Try to unwrap JSON data
                         
@@ -73,32 +75,32 @@ class ViewController: UIViewController {
                         if(userId != nil) {
                             
                             // DO NOT STORE PASSWORD
-                            NSUserDefaults.standardUserDefaults().setObject(parseJSON["userFirstName"], forKey: "userFirstName")
-                            NSUserDefaults.standardUserDefaults().setObject(parseJSON["userLastName"], forKey: "userLastName")
+                            UserDefaults.standard.set(parseJSON["userFirstName"], forKey: "userFirstName")
+                            UserDefaults.standard.set(parseJSON["userLastName"], forKey: "userLastName")
                             /* This is where we store the user's Id for app use */
-                            NSUserDefaults.standardUserDefaults().setObject(parseJSON["userId"], forKey: "userId")
-                            NSUserDefaults.standardUserDefaults().synchronize() // Store user data within app for later access
+                            UserDefaults.standard.set(parseJSON["userId"], forKey: "userId")
+                            UserDefaults.standard.synchronize() // Store user data within app for later access
                             
                             /*
-                            // Take user to protected page
-                            let dashboard = self.storyboard?.instantiateViewControllerWithIdentifier("DashboardViewController") as! DashboardViewController
+                             // Take user to protected page
+                             let dashboard = self.storyboard?.instantiateViewControllerWithIdentifier("DashboardViewController") as! DashboardViewController
+                             
+                             let dashboardNav = UINavigationController(rootViewController: dashboard)
+                             let appDelegate = UIApplication.sharedApplication().delegate
+                             appDelegate?.window??.rootViewController = dashboardNav
+                             */
                             
-                            let dashboardNav = UINavigationController(rootViewController: dashboard)
-                            let appDelegate = UIApplication.sharedApplication().delegate
-                            appDelegate?.window??.rootViewController = dashboardNav
-                            */
-                            
-                            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
                             appDelegate.buildNavigationDrawer()
- 
+                            
                         } else {
                             
                             // Display alert message
                             let userMessage = parseJSON["message"] as? String
-                            let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
-                            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+                            let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.alert)
+                            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
                             myAlert.addAction(okAction)
-                            self.presentViewController(myAlert, animated: true, completion: nil)
+                            self.present(myAlert, animated: true, completion: nil)
                             
                         }
                         
@@ -106,18 +108,16 @@ class ViewController: UIViewController {
                 } catch {
                     print(error)
                 }
-                
             }
-            
-        }).resume()
-        
+        }
+        task.resume()
     }
     
     func displayAlertMessage(userMessage: String) {
-        let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
-        let okAction = UIAlertAction(title: "OK", style:UIAlertActionStyle.Default, handler: nil)
+        let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "OK", style:UIAlertActionStyle.default, handler: nil)
         myAlert.addAction(okAction)
-        self.presentViewController(myAlert, animated: true, completion: nil)
+        present(myAlert, animated: true, completion: nil)
     }
 
 }

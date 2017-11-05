@@ -22,9 +22,9 @@ class BOLViewController: UIViewController {
     }
     
     @IBAction func sidebarBtnPressed(sender: AnyObject) {
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as!AppDelegate
+        let appDelegate:AppDelegate = UIApplication.shared.delegate as!AppDelegate
         
-        appDelegate.drawerContainer!.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+        appDelegate.drawerContainer!.toggle(MMDrawerSide.left, animated: true, completion: nil)
     }
     
 }

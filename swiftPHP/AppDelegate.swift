@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        let userId = NSUserDefaults.standardUserDefaults().stringForKey("userId")
+        let userId = UserDefaults.standard.string(forKey: "userId")
         
         if(userId != nil) {
             // If user is signed in, take them to dashboard
@@ -60,16 +60,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mainStoryBoard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
         // Instantiate view controllers
-        let dashboard:DashboardViewController = mainStoryBoard.instantiateViewControllerWithIdentifier("DashboardViewController") as! DashboardViewController
-        let sidebar:SidebarViewController = mainStoryBoard.instantiateViewControllerWithIdentifier("SidebarViewController") as! SidebarViewController
+        let dashboard:DashboardViewController = mainStoryBoard.instantiateViewController(withIdentifier: "DashboardViewController") as! DashboardViewController
+        let sidebar:SidebarViewController = mainStoryBoard.instantiateViewController(withIdentifier: "SidebarViewController") as! SidebarViewController
         
         let dashboardNav = UINavigationController(rootViewController: dashboard)
         let sidebarNav = UINavigationController(rootViewController: sidebar)
         
-        drawerContainer = MMDrawerController(centerViewController: dashboardNav, leftDrawerViewController: sidebarNav)
+        drawerContainer = MMDrawerController(center: dashboardNav, leftDrawerViewController: sidebarNav)
         
-        drawerContainer!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.PanningCenterView
-        drawerContainer!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.PanningCenterView
+        drawerContainer!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.panningCenterView
+        drawerContainer!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.panningCenterView
         
         window?.rootViewController = drawerContainer
     }

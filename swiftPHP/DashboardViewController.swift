@@ -19,31 +19,30 @@ class DashboardViewController: UIViewController, UIImagePickerControllerDelegate
         // Do any additional setup after loading the view.
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let userFirstName = NSUserDefaults.standardUserDefaults().stringForKey("userFirstName")
-        let userLastName = NSUserDefaults.standardUserDefaults().stringForKey("userLastName")
+        let userFirstName = UserDefaults.standard.string(forKey: "userFirstName")
+        let userLastName = UserDefaults.standard.string(forKey: "userLastName")
         let username = userFirstName! + " " + userLastName!
         usernameLbl.text = username
         
         // Check if profile image is set
         if(profilePhotoImageView.image == nil) {
-            let userId = NSUserDefaults.standardUserDefaults().stringForKey("userId")
+            let userId = UserDefaults.standard.string(forKey: "userId")
             let imageUrl = NSURL(string:"http://localhost/swiftPHP/photos/\(userId!)/user-profile.jpg") // Concatenate user id to image path
             
             // Dispatch an asynchronous background thread
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                
-                let imageData = NSData(contentsOfURL: imageUrl!)
+            DispatchQueue.global(qos: .background).async {
+                let imageData = NSData(contentsOf: imageUrl! as URL)
                 
                 if(imageData != nil) {
                     // Communicate back to the UI
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.profilePhotoImageView.image = UIImage(data: imageData!)
-                    })
+                    DispatchQueue.main.async {
+                        self.profilePhotoImageView.image = UIImage(data: imageData! as Data)
+                    }
+                    
                 }
-                
             }
         }
     }
@@ -56,16 +55,16 @@ class DashboardViewController: UIViewController, UIImagePickerControllerDelegate
     @IBAction func selectPhotoBtnPressed(sender: AnyObject) {
         let myImagePicker = UIImagePickerController()
         myImagePicker.delegate = self
-        myImagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        myImagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
         
-        self.presentViewController(myImagePicker, animated: true, completion: nil)
+        self.present(myImagePicker, animated: true, completion: nil)
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         profilePhotoImageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
 
-        let spinningActivity = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        let spinningActivity = MBProgressHUD.showAdded(to: self.view, animated: true)
         spinningActivity.label.text = "Loading image..."
         spinningActivity.detailsLabel.text = "Please wait"
         
@@ -74,10 +73,10 @@ class DashboardViewController: UIViewController, UIImagePickerControllerDelegate
 
     func imgUploadRequest() {
         let myUrl = NSURL(string: "http://localhost/swiftPHP/scripts/imageUpload.php");
-        let request = NSMutableURLRequest(URL:myUrl!);
-        request.HTTPMethod = "POST";
+        var request = URLRequest(url:myUrl! as URL);
+        request.httpMethod = "POST";
         
-        let userId:String? = NSUserDefaults.standardUserDefaults().stringForKey("userId")
+        let userId:String? = UserDefaults.standard.string(forKey: "userId")
         
         let param = [
             "userId" : userId!
@@ -90,12 +89,11 @@ class DashboardViewController: UIViewController, UIImagePickerControllerDelegate
         
         if(imageData==nil)  { return; } // If image is empty, do not upload to server
 
-        request.HTTPBody = createBodyWithParameters(param, filePathKey: "file", imageDataKey: imageData, boundary: boundary)
+        request.httpBody = createBodyWithParameters(parameters: param, filePathKey: "file", imageDataKey: imageData as! NSData, boundary: boundary) as Data
         
-        NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: { (data:NSData?, response:NSURLResponse?, error:NSError?) in
-            
-            dispatch_async(dispatch_get_main_queue()) {
-                MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            DispatchQueue.main.async {
+                MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
             }
             
             if error != nil {
@@ -104,19 +102,19 @@ class DashboardViewController: UIViewController, UIImagePickerControllerDelegate
             }
             
             do {
-                let json = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers) as? NSDictionary
+                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
                 
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async() {
                     if let parseJSON = json {
                         // let userId = parseJSON["userId"] as? String
                         
                         // Display an alert message
                         let userMessage = parseJSON["message"] as? String
-                        self.displayAlertMessage(userMessage!)
+                        self.displayAlertMessage(userMessage: userMessage!)
                     } else {
                         // Display an alert message
                         let userMessage = "Could not upload image at this time."
-                        self.displayAlertMessage(userMessage)
+                        self.displayAlertMessage(userMessage: userMessage)
                     }
                 }
             } catch
@@ -124,19 +122,19 @@ class DashboardViewController: UIViewController, UIImagePickerControllerDelegate
                 print(error)
             }
             
-        }).resume()
-        
+        }
+        task.resume()
     }
   
     @IBAction func sidebarBtnPressed(sender: AnyObject) {
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as!AppDelegate
+        let appDelegate:AppDelegate = UIApplication.shared.delegate as!AppDelegate
         
-        appDelegate.drawerContainer!.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+        appDelegate.drawerContainer!.toggle(MMDrawerSide.left, animated: true, completion: nil)
     }
     
     // Separate each HTTP request with this
     func generateBoundaryString() -> String {
-        return "Boundary-\(NSUUID().UUIDString)"
+        return "Boundary-\(NSUUID().uuidString)"
     }
         
     func createBodyWithParameters(parameters: [String: String]?, filePathKey: String?, imageDataKey: NSData!, boundary: String) -> NSData {
@@ -144,9 +142,9 @@ class DashboardViewController: UIViewController, UIImagePickerControllerDelegate
         
         if parameters != nil {
             for (key, value) in parameters! {
-                body.appendString("--\(boundary)\r\n")
-                body.appendString("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
-                body.appendString("\(value)\r\n")
+                body.appendString(string: "--\(boundary)\r\n")
+                body.appendString(string: "Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+                body.appendString(string: "\(value)\r\n")
             }
         }
         
@@ -154,22 +152,22 @@ class DashboardViewController: UIViewController, UIImagePickerControllerDelegate
         
         let mimetype = "image/jpg"
         
-        body.appendString("--\(boundary)\r\n")
-        body.appendString("Content-Disposition: form-data; name=\"\(filePathKey!)\"; filename=\"\(filename)\"\r\n")
-        body.appendString("Content-Type: \(mimetype)\r\n\r\n")
-        body.appendData(imageDataKey)
-        body.appendString("\r\n")
+        body.appendString(string: "--\(boundary)\r\n")
+        body.appendString(string: "Content-Disposition: form-data; name=\"\(filePathKey!)\"; filename=\"\(filename)\"\r\n")
+        body.appendString(string: "Content-Type: \(mimetype)\r\n\r\n")
+        body.append(imageDataKey as Data)
+        body.appendString(string: "\r\n")
         
-        body.appendString("--\(boundary)--\r\n")
+        body.appendString(string: "--\(boundary)--\r\n")
         
         return body
     }
     
     func displayAlertMessage(userMessage: String) {
-        let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
-        let okAction = UIAlertAction(title: "OK", style:UIAlertActionStyle.Default, handler: nil)
+        let myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "OK", style:UIAlertActionStyle.default, handler: nil)
         myAlert.addAction(okAction)
-        self.presentViewController(myAlert, animated: true, completion: nil)
+        self.present(myAlert, animated: true, completion: nil)
     }
     
 //    @IBAction func logoutBtnPressed(sender: AnyObject) {
@@ -190,7 +188,7 @@ class DashboardViewController: UIViewController, UIImagePickerControllerDelegate
 
 extension NSMutableData {
     func appendString(string: String) {
-        let data = string.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
-        appendData(data!)
+        let data = string.data(using: String.Encoding.utf8, allowLossyConversion: true)
+        append(data!)
     }
 }
